@@ -1,0 +1,49 @@
+version: "3.9"
+
+volumes:
+  backend:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  database:
+    build:
+      context: ./Assets
+      dockerfile: BuildDatabase.Dockerfile
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d JWT" ]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_DB: JWT
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin-password
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - backend:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  api:
+    build:
+      context: .
+      dockerfile: ./Assets/BuildAPI.Dockerfile
+    environment:
+      DATABASE_CONNECTION_STRING: "Server=database;Port=5432;Database=JWT;User Id=admin;Password=admin-password"
+      JWT_SUBJECT: "ACCESS_TOKEN"
+      JWT_KEY: "31a852972fe45b91b1363645dc6a5eb168574056cea7cda3fcb0ef2062e363bb5751ba62259184d7aae1a9ff40737154af509f2cfdf91351d051b7fecc464f6b"
+      JWT_ISSUER: "JWT_AUTH_SERVER"
+      JWT_AUDIENCE: "TODO_API_BACK"
+    ports:
+      - "8080:80"
+    networks:
+      - backend
+    depends_on:
+      database:
+        condition: service_healthy

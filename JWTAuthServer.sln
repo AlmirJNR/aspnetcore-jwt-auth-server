@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWTAuthServer.API", "Src\JWTAuthServer.API\JWTAuthServer.API.csproj", "{D03312D2-02BA-48D9-A714-6CAE1B76D64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWTAuthServer.Contracts", "Src\JWTAuthServer.Contracts\JWTAuthServer.Contracts.csproj", "{0EE318BE-D98D-44D1-8DB0-526D4F2A6471}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWTAuthServer.Data", "Src\JWTAuthServer.Data\JWTAuthServer.Data.csproj", "{1B904F0A-3C80-4186-9989-6364A6C60762}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A77B1D6-70BD-4FC8-9FD2-2A761B24FA78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A77B1D6-70BD-4FC8-9FD2-2A761B24FA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A77B1D6-70BD-4FC8-9FD2-2A761B24FA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A77B1D6-70BD-4FC8-9FD2-2A761B24FA78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF69646-9EE7-40F1-98FD-2B7F9AA42259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF69646-9EE7-40F1-98FD-2B7F9AA42259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF69646-9EE7-40F1-98FD-2B7F9AA42259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF69646-9EE7-40F1-98FD-2B7F9AA42259}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F6E3C75-677E-46B3-8EE3-D38A0DDBD5D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F6E3C75-677E-46B3-8EE3-D38A0DDBD5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F6E3C75-677E-46B3-8EE3-D38A0DDBD5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F6E3C75-677E-46B3-8EE3-D38A0DDBD5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{107C7741-29CA-4116-94F2-F10B4036505F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107C7741-29CA-4116-94F2-F10B4036505F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107C7741-29CA-4116-94F2-F10B4036505F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107C7741-29CA-4116-94F2-F10B4036505F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D03312D2-02BA-48D9-A714-6CAE1B76D64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D03312D2-02BA-48D9-A714-6CAE1B76D64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D03312D2-02BA-48D9-A714-6CAE1B76D64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D03312D2-02BA-48D9-A714-6CAE1B76D64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EE318BE-D98D-44D1-8DB0-526D4F2A6471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EE318BE-D98D-44D1-8DB0-526D4F2A6471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EE318BE-D98D-44D1-8DB0-526D4F2A6471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EE318BE-D98D-44D1-8DB0-526D4F2A6471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B904F0A-3C80-4186-9989-6364A6C60762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B904F0A-3C80-4186-9989-6364A6C60762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B904F0A-3C80-4186-9989-6364A6C60762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B904F0A-3C80-4186-9989-6364A6C60762}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
