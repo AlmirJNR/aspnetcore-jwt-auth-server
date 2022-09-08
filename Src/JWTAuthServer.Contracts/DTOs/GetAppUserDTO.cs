@@ -2,10 +2,10 @@ using Data.Models;
 
 namespace Contracts.DTOs;
 
-public class GetAppUserDTO
+public readonly record struct GetAppUserDTO()
 {
-    public string Email { get; set; } = null!;
-    public string Password { get; set; } = null!;
+    public string Email { get; init; } = null!;
+    public string Password { get; init; } = null!;
 
     public AppUser ToModel() => new AppUser { Email = Email, Password = Password };
 }
