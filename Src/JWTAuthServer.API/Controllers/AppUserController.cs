@@ -1,7 +1,10 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using API.Services;
 using Contracts.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers;
 
@@ -17,7 +20,7 @@ public class AppUserController : ControllerBase
     {
         _appUserService = appUserService;
     }
-    
+
     /// <summary>
     /// Creates a new user
     /// </summary>
@@ -51,34 +54,38 @@ public class AppUserController : ControllerBase
         };
     }
 
-    private readonly record struct UserPassword(string Password);
-    
+    private readonly record struct UserPasswordWrapper(string Password);
+
     /// <summary>
     /// Get user password
     /// </summary>
     /// <response code="400">Bad request</response>
     /// <response code="401">User has yet to be authenticated</response>
     /// <response code="200">Password retrieved with success</response>
-    [HttpGet("{userId:guid}")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(typeof(UserPassword), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetPassword([FromRoute] Guid userId)
+    [ProducesResponseType(typeof(UserPasswordWrapper), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetPassword()
     {
-        var claimsIdentity = HttpContext.User;
-        var claims = claimsIdentity.Claims.ToDictionary(claim => claim.Type, claim => claim.Value);
-
-        var userIdResponse = claims.TryGetValue("userId", out var jwtUserId);
-        if (!userIdResponse || string.IsNullOrWhiteSpace(jwtUserId))
+        var jwtExpirationString = User.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Exp)?.Value;
+        var userIdString = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrWhiteSpace(jwtExpirationString) || string.IsNullOrWhiteSpace(userIdString))
             return BadRequest();
 
-        if (jwtUserId != userId.ToString())
-            return Unauthorized();
+        if (!long.TryParse(jwtExpirationString, out var jwtExpiration) || jwtExpiration == 0)
+            return new StatusCodeResult(500);
+
+        Console.WriteLine($"exp: {jwtExpiration}");
+        Console.WriteLine($"UtcNowTicks: {EpochTime.GetIntDate(DateTime.UtcNow)}");
+
+        if (!Guid.TryParse(userIdString, out var userId) || userId == Guid.Empty)
+            return new StatusCodeResult(500);
 
         var user = await _appUserService.GetUserById(userId);
         if (user is null)
             return BadRequest();
 
-        return Ok(new UserPassword(user.Password));
+        return Ok(new UserPasswordWrapper(user.Password));
     }
 }

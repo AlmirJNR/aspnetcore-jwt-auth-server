@@ -44,10 +44,9 @@ public class TokenController : ControllerBase
 
         var claimsArray = new Claim[]
         {
-            new(JwtRegisteredClaimNames.Sub, Environment.GetEnvironmentVariable("JWT_SUBJECT") ?? string.Empty),
+            new(JwtRegisteredClaimNames.Sub, response.Id.ToString()),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)),
-            new("userId", response.Id.ToString()),
             new("email", response.Email)
         };
 
@@ -59,7 +58,7 @@ public class TokenController : ControllerBase
             issuer: Environment.GetEnvironmentVariable("JWT_ISSUER"),
             audience: Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
             claims: claimsArray,
-            expires: DateTime.UtcNow.AddMinutes(10),
+            expires: DateTime.UtcNow.AddSeconds(10),
             signingCredentials: credentials);
 
         var serializedToken = new JwtSecurityTokenHandler().WriteToken(token);

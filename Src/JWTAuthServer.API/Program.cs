@@ -51,7 +51,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(
                 Environment.GetEnvironmentVariable("JWT_KEY")
-                ?? throw new Exception()))
+                ?? throw new Exception())),
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.FromSeconds(15)
     };
 });
 

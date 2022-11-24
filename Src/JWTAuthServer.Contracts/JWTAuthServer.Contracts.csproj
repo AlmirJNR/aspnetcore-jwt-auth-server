@@ -11,8 +11,4 @@
       <ProjectReference Include="..\JWTAuthServer.Data\JWTAuthServer.Data.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Interfaces" />
-    </ItemGroup>
-
 </Project>
